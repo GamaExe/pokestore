@@ -1,8 +1,7 @@
-import React from 'react';
+import axios from 'axios';
 
-export default function Api(){
-    const baseURL = 'https://pokeapi.co/api/v2/';
-    return(
-        
-    )
-}
+const api = axios.create({
+    baseURL:'https://pokeapi.co/api/v2'
+})
+
+export default api;
