@@ -6,6 +6,7 @@ import pokebola from '../../assets/pokebola.jpg';
 export default function Catalogo(){
 
     const [pokemons, setPokemons] = useState([]);
+    const [listaPokemon, setListaPokemon] = useState([]);
 
     useEffect(()=>{
         api.get('/ability').then(res=>{
@@ -25,6 +26,14 @@ export default function Catalogo(){
         })
         
     },[])
+
+    function enviar(nome, preco){
+        const pokemon = {
+            nome, 
+            preco
+        }
+        setListaPokemon(pokemon);
+    }
 
     return(
         <>
@@ -49,7 +58,7 @@ export default function Catalogo(){
                         <h5 className="card-title">{pokemon.nome}</h5>
                         <p className="card-text">{pokemon.descricao}</p>
                         <p className="card-text">R$: {pokemon.preco}</p>
-                        <button to="#" className="btn btn-primary">Buy me!</button>
+                        <button type="button" onClick={() => enviar(pokemon.nome, pokemon.preco)} className="btn btn-primary">Buy me!</button>
                     </div>
                 </div>
             ))}
