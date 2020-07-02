@@ -9,23 +9,50 @@ export default function Catalogo(){
     const [listaPokemon, setListaPokemon] = useState([]);
 
     useEffect(()=>{
-        api.get('/ability').then(res=>{
-            const pokemonsList = res.data.results.map((pokemon, index) =>{
-                const precoMath = Math.random() * (1000 - 50) + 50;  
-                let pokemonObj = {
-                    id: index + 1,
-                    nome: pokemon.name,
-                    preco: parseFloat(precoMath.toFixed(2)) 
+        (async function(){
+            try{
+                const pokemonsList = []
+    
+                for(let i = 1; i<= 20; i++){
+                    const id = await getPokeId(i);
+                    const nome = await getPokeNome(id);       
+                    const url = await getPokeUrl(id);
+                    const precoMath = Math.random() * (50 - 10) + 10;
+    
+                    const pokemonObj = {
+                        id: id,
+                        nome: nome,
+                        url: url,
+                        preco: parseFloat(precoMath.toFixed(0)) 
+                    }
+    
+                    pokemonsList.push(pokemonObj);
                 }
-                api.get(`/characteristic/${index + 1 }`).then(resp=>{
-                    pokemonObj.descricao = resp.data.descriptions[1].description
-                })
-                return pokemonObj;
-            })
-            setPokemons(pokemonsList);
-        })
+                setPokemons(pokemonsList); 
+            }catch(err){
+                console.log(`Deu ruin no MAIN: ${err}`)
+            }
+        })()
         
     },[])
+
+    async function getPokeId(id){   
+        return await api.get(`/pokemon/${id}`).then((res)=>{
+            return res.data.id;
+        });       
+    }
+
+    async function getPokeNome(id){   
+        return await api.get(`/pokemon/${id}`).then((res)=>{
+            return res.data.name;
+        });       
+    }
+
+    async function getPokeUrl(id){   
+        return await api.get(`/pokemon/${id}`).then((res)=>{
+            return res.data.sprites.front_default;
+        });       
+    }
 
     function enviar(nome, preco){
         const pokemon = {
@@ -52,12 +79,12 @@ export default function Catalogo(){
             {pokemons.map(pokemon=>(
                 <div key={pokemon.id} className="card text-white bg-dark card_pokemon">
                     <img className="card-img-top" 
-                        src ='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSCG3hJi46hA4uI_venQAczww4TS4moXTHISA&usqp=CAU'
+                        src ={pokemon.url}
                         alt=''/>
                     <div className="card-body">
                         <h5 className="card-title">{pokemon.nome}</h5>
                         <p className="card-text">{pokemon.descricao}</p>
-                        <p className="card-text">R$: {pokemon.preco}</p>
+                        <p className="card-text">R$: {pokemon.preco},00</p>
                         <button type="button" onClick={() => enviar(pokemon.nome, pokemon.preco)} className="btn btn-primary">Buy me!</button>
                     </div>
                 </div>

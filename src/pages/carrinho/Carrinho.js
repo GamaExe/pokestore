@@ -63,7 +63,7 @@ export default function Carrinho(){
                     
                 </div>
                 <div className="card-body">
-                    <p className="total"><strong>Total:</strong><div>R$:1000,00</div></p>
+                    <div className="total"><strong>Total:</strong><div>R$:1000,00</div></div>
                     <button className="btn btn-primary btn-lg btn-block">Finalizar</button>
                 </div>
             </div>
