@@ -14,9 +14,23 @@
 }
 
 .card_pokemon{
-    width: 18rem;
+    width: 175px;
+    height: 240px;
     padding: 10px;
     margin: 20px;
+}
+
+.card_dados{
+    padding: 0;
+    text-align: center;
+}
+
+.card_dados .card-title{
+    font-size: 15px;
+}
+
+.card_dados .card-text{
+    font-size: 20px;
 }
 
 .card-body button{
@@ -26,3 +40,4 @@
 .card-body .card-title:first-letter {
     text-transform:capitalize;
 }
+

@@ -1,12 +1,10 @@
 import React from 'react';
 import './App.css';
-import Carrinho from './pages/carrinho/Carrinho';
+import Routes from './routes';
 
 function App() {
   return (
-    <div className="App">
-      <Carrinho/>
-    </div>
+    <Routes/>
   );
 }
 

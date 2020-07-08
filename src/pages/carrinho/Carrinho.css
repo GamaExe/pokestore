@@ -7,6 +7,10 @@
     padding: 0;
 }
 
+.title{ 
+    text-align: center;
+}
+
 .lista{
     max-height: 200px;
     overflow: auto;
@@ -46,4 +50,13 @@
 .card-body .total{
     font-size: 20px;
     margin: 20px;
+}
+
+.carrinho-title:first-letter {
+    text-transform:capitalize;
+}
+
+.remover_item{
+    border: none;
+    background: none;
 }
